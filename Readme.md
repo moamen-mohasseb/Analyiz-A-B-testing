@@ -576,7 +576,7 @@ new_page_converted
 
 
 
-    0.12039777028421994
+    0.1193379671048104
 
 
 
@@ -592,7 +592,7 @@ old_page_converted
 
 
 
-    0.12126051461376433
+    0.11905089692580915
 
 
 
@@ -606,7 +606,7 @@ new_page_converted-old_page_converted
 
 
 
-    -0.0008627443295443904
+    0.00028707017900124476
 
 
 
@@ -665,13 +665,13 @@ plt.axvline(x=obs_diff, color='red');
 
 
 
-    0.9023
+    0.9129
 
 
 
 k. In words, explain what you just computed in part **j.**  What is this value called in scientific studies?  What does this value mean in terms of whether or not there is a difference between the new and old pages?
 
-**As the p-value(0.9023) larger than alpha(0.5) we cannot reject the null hypothesis. which mean old_page is better than or equall new_page.**
+**As the p-value(0.9129) larger than alpha(0.5) we cannot reject the null hypothesis. which mean old_page is better than or equall new_page.**
 
 l. We could also use a built-in to achieve similar results.  Though using the built-in might be easier to code, the above portions are a walkthrough of the ideas that are critical to correctly thinking about statistical significance. Fill in the below to calculate the number of conversions for each page, as well as the number of individuals who received each page. Let `n_old` and `n_new` refer the the number of rows associated with the old page and new pages, respectively.
 
@@ -751,25 +751,25 @@ n_new = df2.query('landing_page=="new_page"').shape[0]
 
 m. Now use `stats.proportions_ztest` to compute your test statistic and p-value.  [Here](http://knowledgetack.com/python/statsmodels/proportions_ztest/) is a helpful link on using the built in.
 
+n. What do the z-score and p-value you computed in the previous question mean for the conversion rates of the old and new pages?  Do they agree with the findings in parts **j.** and **k.**?
+
 
 ```python
-stat, pval = sm.stats.proportions_ztest([convert_old,convert_new], [n_old,n_new],alternative = 'smaller')
-print('statistics = ',stat,' p-value = ',pval)
+z_score, pval = sm.stats.proportions_ztest([convert_old,convert_new], [n_old,n_new],alternative = 'smaller')
+print('z_score = ',z_score,' p-value = ',pval)
 ```
 
-    statistics =  1.3109241984234394  p-value =  0.9050583127590245
+    z_score =  1.3109241984234394  p-value =  0.9050583127590245
     
 
 
 ```python
-z_score, pval = sm.stats.proportions_ztest([convert_old,convert_new], [n_old,n_new],alternative = 'larger')
+z_score, pval =sm.stats.proportions_ztest([convert_new, convert_old], [n_new, n_old],alternative = 'larger')
 print('z_score = ',stat,' p-value = ',pval)
 ```
 
-    z_score =  1.3109241984234394  p-value =  0.09494168724097551
+    z_score =  1.3109241984234394  p-value =  0.9050583127590245
     
-
-n. What do the z-score and p-value you computed in the previous question mean for the conversion rates of the old and new pages?  Do they agree with the findings in parts **j.** and **k.**?
 
 
 ```python
@@ -785,11 +785,11 @@ print(norm.ppf(1-(0.05)))
 # Here, we take the 95% values as specified in PartII.1
 ```
 
-    0.9050583127590245
+    0.09494168724097551
     1.6448536269514722
     
 
-**z-score is less than critical value 1.644 and P-value=0.0905 obtained is similar to the result obtained from  above in j. and k. which also fails to reject the null hypothesis**
+**z-score is less than critical value 1.644 and P-value=0.905 obtained is similar to the result obtained from  above in j. and k. which also fails to reject the null hypothesis**
 
 <a id='regression'></a>
 ### Part III - A regression approach
@@ -959,10 +959,10 @@ results.summary()
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>   <td>     1</td>   
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 23 Feb 2021</td> <th>  Pseudo R-squ.:     </th>  <td>8.077e-06</td> 
+  <th>Date:</th>            <td>Wed, 24 Feb 2021</td> <th>  Pseudo R-squ.:     </th>  <td>8.077e-06</td> 
 </tr>
 <tr>
-  <th>Time:</th>                <td>20:24:17</td>     <th>  Log-Likelihood:    </th> <td>-1.0639e+05</td>
+  <th>Time:</th>                <td>09:24:40</td>     <th>  Log-Likelihood:    </th> <td>-1.0639e+05</td>
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td>-1.0639e+05</td>
@@ -1373,10 +1373,10 @@ results.summary()
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>   <td>     2</td>   
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 23 Feb 2021</td> <th>  Pseudo R-squ.:     </th>  <td>1.521e-05</td> 
+  <th>Date:</th>            <td>Wed, 24 Feb 2021</td> <th>  Pseudo R-squ.:     </th>  <td>1.521e-05</td> 
 </tr>
 <tr>
-  <th>Time:</th>                <td>20:24:29</td>     <th>  Log-Likelihood:    </th> <td>-1.0639e+05</td>
+  <th>Time:</th>                <td>09:24:43</td>     <th>  Log-Likelihood:    </th> <td>-1.0639e+05</td>
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td>-1.0639e+05</td>
@@ -1565,10 +1565,10 @@ results.summary()
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>   <td>     5</td>   
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 23 Feb 2021</td> <th>  Pseudo R-squ.:     </th>  <td>3.482e-05</td> 
+  <th>Date:</th>            <td>Wed, 24 Feb 2021</td> <th>  Pseudo R-squ.:     </th>  <td>3.482e-05</td> 
 </tr>
 <tr>
-  <th>Time:</th>                <td>20:24:32</td>     <th>  Log-Likelihood:    </th> <td>-1.0639e+05</td>
+  <th>Time:</th>                <td>09:24:46</td>     <th>  Log-Likelihood:    </th> <td>-1.0639e+05</td>
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td>-1.0639e+05</td>
@@ -1603,13 +1603,14 @@ results.summary()
 
 
 
+
 **Results:**
 > * after adding country the result summary almost the same so country has no influence in the result
 >
 > * None of the variables have significant p-values. Therefore, we will fail to reject the null and conclude that there is not sufficient evidence to suggest that there is an interaction between country and page received that will predict whether a user converts or not.
 
 **Conclusion:**
-> **We suppose to accept null  hypotheses as there is no sufficient evidence to suggest that the new page results in more conversions than the old page**
+> **We suppose not to reject null  hypotheses as there is no sufficient evidence to suggest that the new page results in more conversions than the old page**
 
 **Resources:**
 > * Only course content.
@@ -1643,6 +1644,11 @@ call(['python', '-m', 'nbconvert', 'Analyze_ab_test_results_notebook.ipynb'])
     0
 
 
+
+
+```python
+
+```
 
 
 ```python
